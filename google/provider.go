@@ -9,6 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/mutexkv"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform/helper/mutexkv"
+	"github.com/hashicorp/terraform/helper/schema"
 
 	googleoauth "golang.org/x/oauth2/google"
 )
