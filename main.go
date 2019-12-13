@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/terraform-providers/terraform-provider-google/google"
 )
 
@@ -14,14 +14,12 @@ func main() {
 	// 	ProviderFunc: google.Provider})
 
 	stuff := google.Provider()
-	resources := stuff.ResourcesMap
+	resources := stuff.Resources()
 	count = make(map[string]bool, 0)
 
 	for name, resource := range resources {
 		// fmt.Println(name)
-		if resource.Update == nil {
-			continue
-		}
+
 		if checkForProblems(name, "", resource) {
 			fmt.Printf("There is a problem with %s\n", name)
 		}
@@ -29,7 +27,7 @@ func main() {
 	// fmt.Println(count, len(count))
 }
 
-func checkForProblems(base string, path string, resource *schema.Resource) bool {
+func checkForProblems(base string, path string, resource *schema) bool {
 
 	for property, item := range resource.Schema {
 		// if item.Type == schema.TypeSet {
